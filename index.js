@@ -8,7 +8,7 @@ const { UserModel } = require("./Model/user.model");
 require("dotenv").config();
 app.use(express.json());
 app.post("/register", async (req, res) => {
-  const { Name, Email, Password } = req.body;
+  const { Email, Password } = req.body;
   try {
     const user = await UserModel.find({ Email });
 
@@ -16,7 +16,7 @@ app.post("/register", async (req, res) => {
       res.send("email is already registered");
     } else {
       bcrypt.hash(Password, 5, async (err, hash) => {
-        const user = new UserModel({ Name, Email, Password: hash });
+        const user = new UserModel({ Email, Password: hash });
         await user.save();
         res.send("Registered");
       });
