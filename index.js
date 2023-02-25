@@ -2,10 +2,12 @@ const { connection } = require("./Config/db");
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 const app = express();
 const { Authentication } = require("./Middelware/authentication");
 const { UserModel } = require("./Model/user.model");
 require("dotenv").config();
+app.use(cors());
 app.use(express.json());
 app.post("/register", async (req, res) => {
   const { Email, Password } = req.body;
